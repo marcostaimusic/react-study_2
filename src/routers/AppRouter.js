@@ -6,6 +6,7 @@ import { LoginScreen } from "../Components/login/LoginScreen";
 import { DashboardRoutes } from "./DashboardRoutes";
 import { PrivateRoute } from "./PrivateRoute";
 import { AuthContext } from "../auth/AuthContext";
+import { PublicRoute } from "./PublicRoute";
 export const AppRouter = () => {
   const { user } = useContext(AuthContext);
   return (
@@ -21,8 +22,15 @@ export const AppRouter = () => {
               />
             }
           />
-
-          <Route path="/login" element={<LoginScreen />} />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute
+                isAuthenticated={user.logged}
+                element={<LoginScreen />}
+              />
+            }
+          />
         </Routes>
       </>
     </Router>
