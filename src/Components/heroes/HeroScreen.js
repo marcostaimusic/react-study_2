@@ -3,6 +3,12 @@ import { Navigate, Route, Routes, useNavigate, useParams } from "react-router";
 import { getHeroesById } from "../../selectors/getHeroById";
 import "animate.css";
 
+const heroContext = require.context("../../assets/heroes", true);
+
+const heroImage = (id) => {
+  return heroContext(`./${id}.jpg`).default;
+};
+
 export const HeroScreen = () => {
   const params = useParams();
   const history = useNavigate();
@@ -26,7 +32,8 @@ export const HeroScreen = () => {
     <div className="row mt-5">
       <div className="col-4">
         <img
-          src={`../assets/heroes/${id}.jpg`}
+          // src={`../assets/heroes/${id}.jpg`} // importata quando assets era sotto public
+          src={heroImage(id)}
           className="img-thumbnail animate__animated animate__fadeInLeft "
           alt="superhero"
         />
